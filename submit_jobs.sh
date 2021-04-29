@@ -8,22 +8,29 @@
 # Print the task id.
 echo "My SLURM_ARRAY_TASK_ID: " $SLURM_ARRAY_TASK_ID
 
-chunks=$1
-rank=$2
+input=$1
+chunks=$2
+rank=$3
+output=$4
+working_dir=$5
+types=$6
+name=$7
 
-
+echo $input
 echo $chunks
 echo $rank
+echo $output
+echo $working_dir
+echo $types
+echo $name
 
 module purge
 module load python/cpu/3.6.5
 
-
-python hdf5_to_cellprofiler.py --input /gpfs/data/abl/deepomics/AdalQuiros/SharedData/Raw_HDF5/FFPE_90pc_Bkg_rescaled/hdf5_TCGAFFPE4_set00_test.h5 \
+python hdf5_to_cellprofiler.py --input $input \
  --chunks $chunks \
  --rank $rank \
- --output /gpfs/home/ay1392/scratch/Lung/data/TCGAFFPE4_set00 \
- --working_dir /gpfs/home/ay1392/scratch/Lung/data \
- --type "test" \
- --name "TCGAFFPE4_set00_test"
- 
+ --output $output \
+ --working_dir $working_dir \
+ --type $types \
+ --name $name

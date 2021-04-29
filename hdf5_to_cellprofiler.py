@@ -104,8 +104,9 @@ proc = subprocess.call([os.path.join(os.path.abspath(sys.path[0]), "cellprofiler
                          working_dir])
 print(os.listdir(temp_path))
 
-os.mkdir(output)
-
+if not os.path.exists(output):
+    os.makedirs(output)
+    
 os.rename(temp_path + '/nuclei.txt', output + '/nuclei'  + str(name) + str(rank)  +  '.txt')
 os.rename(temp_path + '/file_list.txt', output + '/file_list' + str(name) + str(rank)  + '.txt')
 os.rename(temp_path + '/Image.txt', output + '/Image' + str(name) + str(rank) + '.txt')

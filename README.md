@@ -1,18 +1,24 @@
+
+
 This is my solution to running cellprofiler on hdf5s. I could not figure out how
-to actually run cellprofiler on hdf5s so instead of poking around in the cellprofiler
-code, I have created a wrapper that write the images in an hdf5 into temporary
-directories, and using these images as input into cellprofiler. The code also employs
-parallelization to make things faster. This pipeline uses MPI to accomplish
-handling the hdf5 in parallel.
+to actually run cellprofiler on hdf5s. It seems like it would be a difficult task to
+implement given the flexibility of hdf5 files. In the hdf5s that I am working with
+I have one dataset containing the images, and several datasets with relevant
+labels for each image. There are no special groupings or hierarchy.
+
+I have created a wrapper to write the images in an hdf5 into temporary
+directories, and uses these images as input into cellprofiler. The code then moves
+the relevant output files to a specified output path and deletes the tmp directories.
+The code  employs parallelization to make things faster.
 
 Step 1. Create a cellprofiler pipeline.
 
-Step 2. Change the inputs in submit_jobs.sh to match your needs
+Step 2. Change the inputs in parameters.csv to fit your needs.
 
-Step 3. Run loop_jobs.sh specifying how many chunks you want. For 100 chunks: sbatch loop_jobs.sh 100
+Step 3. Run loop_jobs.sh
 
 Step 4. Aggregate all of the separate cellprofiler outputs of measurements of objects
-by running loop_jobs_agg.sh. 
+by running loop_jobs_agg.sh.
 My aggregate code in aggregate.py is pretty specific to what I care about.
 
 The code that does the actual work is hdf5_to_cellprofiler.py. This code takes
