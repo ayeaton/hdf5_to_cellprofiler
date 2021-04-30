@@ -5,7 +5,7 @@ import argparse
 parser = argparse.ArgumentParser(description="Convert jpeg images sorted is subfolders (1 per class) to hdf5 format.")
 parser.add_argument("--chunks", type=int, default='')
 parser.add_argument("--rank", type=int, default='')
-parser.add_argument("--output", type=int, default='')
+parser.add_argument("--output", type=str, default='')
 
 args = parser.parse_args()
 chunks = args.chunks
@@ -14,7 +14,7 @@ output = args.output
 
 
 # read in all the file rank files
-l = list(glob.glob(output + "/IdentifySecondaryObjects" + '*.txt'))
+l = list(glob.glob(output + "/Image" + '*.txt'))
 num_images = len(l)
 
 # size of the chunks

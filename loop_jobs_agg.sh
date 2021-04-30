@@ -5,9 +5,18 @@
 #SBATCH --mem-per-cpu=2G
 #SBATCH --job-name=loop_cp
 
-END=$1
-echo $END
+INPUT=parameters.csv
 
-for i in $(seq 1 $END);
-  do sbatch submit_jobs_agg.sh $END $i;
-done
+while IFS=$',' read input output working_dir types name END blank
+do
+  echo "input : $input"
+  echo "output : $output"
+  echo "working_dir : $working_dir"
+  echo "types : $types"
+  echo "name : $name"
+
+  for i in $(seq 1 $END);
+    do sbatch submit_jobs_agg.sh $END $i $output;
+  done
+
+done < $INPUT

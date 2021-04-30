@@ -7,11 +7,12 @@
 
 chunks=$1
 rank=$2
-
+output=$3
 
 echo $chunks
 echo $rank
+echo $output
 
 module load python/cpu/3.6.5
 
-python aggregate.py --chunks $chunks --rank $rank
+python aggregate.py --chunks $chunks --rank $rank --output $output
